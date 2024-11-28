@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Emery Cheats</title>
+    <link rel="stylesheet" href="styles.css" media="all">
+    <link rel="icon" href="Emerylogo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v6.5.2/css/pro.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body class="ipsApp ipsApp_front ipsJS_has ipsClearfix" data-controller="core.front.core.app">
+    <!-- Header -->
+    <div class="theme-header__wrapper">
+        <header id="theme-header">
+            <div class="upper-nav">
+                <div class="left">
+                    <a href="index.html" class="logo">
+                        <img src="Emerylogo.png" alt="Logo"> Emery Cheats
+                    </a>
+                    <a href="#" class="discord-button">Discord</a>
+                </div>
+                <div class="right">
+        
+                </div>
+            </div>
+            <div class="lower-nav">
+                <ul>
+                    <li><a href="cheats-info.html"><i class="fa-solid fa-info-circle"></i> Information</a></li>
+                    <li><a href="store.html"><i class="fa-solid fa-store"></i> Buy now</a></li>
+                    <li><a href="reviews.html"><i class="fa-solid fa-star"></i> Reviews</a></li>
+                </ul>
+            </div>
+        </header>
+    </div>
+
+    <!-- Main Content -->
+    <main id="ipsLayout_body" class="ipsLayout_container">
+        <h1>Contact Us</h1>
+        <form id="contactForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer id="theme-footer__wrapper">
+        <div class="theme-footer__main">
+            <div class="cFooterMain_wrapper">
+                <div class="cFooterLinks_column">
+                    <img src="Emerylogo.png" alt="Logo" class="footer-logo">
+                    <p class="cFooterLinks_desc">Emery Cheats, the most advanced Rocket League cheat on the market...</p>
+                    <ul class="cFooter_social">
+                        <li><a href="https://www.instagram.com/emerycheats/" title="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://www.pinterest.com.au/emerycheats/" title="Pinterest"><i class="fa-brands fa-pinterest"></i></a></li>
+                        <li><a href="https://x.com/emerycheats" title="X"><i class="fa-brands fa-x-twitter"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@emery_cheats" title="TikTok"><i class="fa-brands fa-tiktok"></i></a></li>
+                    </ul>
+                    <ul class="cFooterLinks_list cFooterLinks_about">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="refund-policy.html">Refund Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cFooter_bottom">
+            <div class="ipsLayout_container">
+                <div class="cFooter_gotop">
+                    <span class="drawnc-action_gotop"><i class="fas fa-chevron-up"></i></span>
+                </div>
+                <a href="https://emerycheats.com/" class="copyright"><b>©</b> EMERY CHEATS</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            fetch('/send-to-discord', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, message })
+            })
+            .then(response => response.text())
+            .then(message => {
+                alert(message);
+                document.getElementById('contactForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error sending message.');
+            });
+        });
+    </script>
+</body>
+</html> 

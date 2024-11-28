@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Reviews - Emery Cheats</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="reviewsstyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel='icon' href='Emerylogo.png'>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v6.5.2/css/pro.min.css">
+</head>
+<body class="ipsApp ipsApp_front ipsJS_has ipsClearfix">
+    <!-- Header -->
+    <div class="theme-header__wrapper">
+        <header id="theme-header">
+            <div class="upper-nav">
+                <div class="left">
+                    <a href="index.html" class="logo">
+                        <img src="Emerylogo.png" alt="Logo"> Emery Cheats
+                    </a>
+                    <a href="#" class="discord-button">Discord</a>
+                </div>
+                <div class="right">
+            
+                </div>
+            </div>
+            <div class="lower-nav">
+                <ul>
+                    <li><a href="cheats-info.html"><i class="fa-solid fa-info-circle"></i><span>Information</span></a></li>
+                    <li><a href="store.html"><i class="fa-solid fa-store"></i><span>Buy now</span></a></li>
+                    <li><a href="reviews.html"><i class="fa-solid fa-star"></i><span>Reviews</span></a></li>
+                </ul>
+            </div>
+        </header>
+    </div>
+    <div id='mobileNav'>
+        <ul>
+          <li class=''>
+            <a href="store.html">
+              <i class="fa-solid fa-store"></i>
+              <span>Buy Now</span>
+            </a>
+          </li>
+          <li class=''>
+            <a href="cheats-info.html">
+              <i class="fa-solid fa-list-check"></i>
+              <span>Information</span>
+            </a>
+          </li>
+          
+          <li class=''>
+            <a href="reviews.html">
+              <i class="fa-solid fa-life-ring"></i>
+              <span>Reviews</span>
+            </a>
+          </li>
+      
+        </ul>
+      </div>
+    <!-- Main Content -->
+    <main id="ipsLayout_body" class="ipsLayout_container">
+        <div id="ipsLayout_contentArea">
+            <div id="ipsLayout_contentWrapper">
+                <h1>Reviews</h1>
+                <div class="reviews-container" id="reviews-container">
+                    <!-- Reviews will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        <div class="cFooterLinks_button">
+            <a href="store.html" class="ipsBuyButton">Buy Now</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="theme-footer__wrapper">
+        <div class="theme-footer__main">
+            <div class="cFooterMain_wrapper">
+                <div class="cFooterLinks_column">
+                    <img src="Emerylogo.png" alt="Logo" class="footer-logo">
+                    <p class="cFooterLinks_desc">Emery Cheats, the most advanced Rocket League cheat on the market...</p>
+                    <ul class="cFooter_social">
+                        <li><a href="https://www.instagram.com/emerycheats/" title="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://www.pinterest.com.au/emerycheats/" title="Pinterest"><i class="fa-brands fa-pinterest"></i></a></li>
+                        <li><a href="https://x.com/emerycheats" title="X"><i class="fa-brands fa-x-twitter"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@emery_cheats" title="TikTok"><i class="fa-brands fa-tiktok"></i></a></li>
+                    </ul>
+                    <ul class="cFooterLinks_list cFooterLinks_about">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="refund-policy.html">Refund Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cFooter_bottom">
+            <div class="ipsLayout_container">
+                <div class="cFooter_gotop">
+                    <span class="drawnc-action_gotop"><i class="fas fa-chevron-up"></i></span>
+                </div>
+                <a href="index.html" class="copyright"><b>©</b> EMERY CHEATS</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript to Load Reviews -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('reviews.json')
+                .then(response => response.json())
+                .then(data => {
+                    const reviewsContainer = document.getElementById('reviews-container');
+                    data.forEach(review => {
+                        const reviewElement = document.createElement('div');
+                        reviewElement.classList.add('review');
+                        reviewElement.innerHTML = `
+                            <img src="${review.profilePicture}" alt="Discord Profile Picture" class="profile-pic">
+                            <div class="review-details">
+                                <span class="reviewer-tag">${review.discordTag}</span>
+                                <span class="review-date">Date: ${review.date}</span>
+                                <div class="review-rating">Rating: ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                                <p class="review-text">${review.reviewText}</p>
+                            </div>
+                        `;
+                        reviewsContainer.appendChild(reviewElement);
+                    });
+                })
+                .catch(error => console.error('Error loading reviews:', error));
+        });
+    </script>
+</body>
+</html>
