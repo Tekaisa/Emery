@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
 
-export function startBot() {
+function startBot() {
     const client = new Client({
         intents: [
             GatewayIntentBits.Guilds,
@@ -58,3 +58,5 @@ export function startBot() {
 
     client.login(process.env.BOT_TOKEN); // Ensure BOT_TOKEN is set in Heroku
 }
+
+module.exports = { startBot };
