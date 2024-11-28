@@ -1,25 +1,18 @@
    // server.js or server.mjs
    import express from 'express';
-   import fetch from 'node-fetch';
    import path from 'path';
    import { fileURLToPath } from 'url';
    import { dirname } from 'path';
-   import { logger } from './Logger.js'; // Corrected import path
+   import { startBot } from './bot.js'; // Import your bot logic
 
    const __filename = fileURLToPath(import.meta.url);
    const __dirname = dirname(__filename);
 
    const app = express();
+   const PORT = process.env.PORT || 3000; // Use the PORT environment variable
 
-   // Use the logger middleware
-   app.use(logger);
-
-   // Use built-in middleware to parse JSON bodies
-   app.use(express.json());
-
-   // Serve static files from the "Frontend" directory
+   // Serve static files from the "public" directory
    app.use(express.static(path.join(__dirname, '../Frontend')));
-
    // Handle POST requests to send data to Discord
    app.post('/send-to-discord', (req, res) => {
        const { name, email, message } = req.body;
@@ -49,6 +42,11 @@
        });
    });
 
-   app.listen(8000, () => {
-       console.log('Server is running on port 8000');
+   // Start the web server
+   app.listen(PORT, () => {
+       console.log(`Server is running on port ${PORT}`);
    });
+
+   // Start the Discord bot
+   startBot();
+   
