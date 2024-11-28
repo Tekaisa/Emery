@@ -3,7 +3,8 @@
    import path from 'path';
    import { fileURLToPath } from 'url';
    import { dirname } from 'path';
-   import { startBot } from '../Frontend/bot.js'; // Import your bot logic
+   import botModule from '../Frontend/bot.js';
+   const { startBot } = botModule;
 
    const __filename = fileURLToPath(import.meta.url);
    const __dirname = dirname(__filename);
