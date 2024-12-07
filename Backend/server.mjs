@@ -34,7 +34,7 @@
      const { name, email, message } = req.body;
 
      try {
-       const channel = await client.channels.fetch('1311794653087010838'); // Replace with your channel ID
+       const channel = await client.channels.fetch('1314650532970893445'); // Replace with your channel ID
        await channel.send(`New contact form submission:\n**Name:** ${name}\n**Email:** ${email}\n**Message:** ${message}`);
        res.status(200).send('Message sent to Discord');
      } catch (error) {
