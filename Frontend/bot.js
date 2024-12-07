@@ -19,7 +19,7 @@ function startBot() {
     
     // Create a new client instance with necessary intents
     // Specify the logging channel ID (replace with your actual channel ID)
-    const LOG_CHANNEL_ID = '1312383146053865503'; // e.g., '123456789012345678'
+    const LOG_CHANNEL_ID = '1314650532970893445'; // e.g., '123456789012345678'
     
     // When the client is ready, run this code (once)
     client.once('ready', () => {
@@ -254,16 +254,23 @@ function startBot() {
 
             // Read existing reviews
             fs.readFile('reviews.json', (err, data) => {
-                if (err) throw err;
+                if (err) {
+                    console.error('Error reading reviews.json:', err);
+                    return;
+                }
                 const reviews = JSON.parse(data);
 
                 // Add new review
                 reviews.push(review);
+                console.log('New review added:', review); // Log the new review
 
                 // Write updated reviews back to file
                 fs.writeFile('reviews.json', JSON.stringify(reviews, null, 2), err => {
-                    if (err) throw err;
-                    console.log('Review added!');
+                    if (err) {
+                        console.error('Error writing to reviews.json:', err);
+                        return;
+                    }
+                    console.log('Review successfully saved to reviews.json!'); // Log success message
                 });
             });
         }
